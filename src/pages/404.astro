@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Page Not Found">
+  <div class="min-h-[70vh] flex items-center justify-center px-6 text-center">
+    <div class="reveal">
+      <p class="font-accent text-[120px] leading-none text-gold/10 font-bold mb-0">404</p>
+      <h1 class="font-display text-4xl font-light text-cream mb-4 -mt-4">
+        Page <span class="italic text-gold">Not Found</span>
+      </h1>
+      <p class="font-body text-cream/50 mb-10 max-w-md mx-auto">
+        The page you're looking for has drifted away like a fragrance on the breeze. Let us guide you back.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/" class="inline-flex items-center gap-2 bg-gold hover:bg-gold-light text-obsidian font-body font-semibold text-sm tracking-widest uppercase px-8 py-4 transition-all duration-300">
+          Return Home
+        </a>
+        <a href="/shop" class="inline-flex items-center gap-2 border border-gold/30 hover:border-gold text-cream hover:text-gold font-body text-sm tracking-widest uppercase px-8 py-4 transition-all duration-300">
+          View Collection
+        </a>
+      </div>
+    </div>
+  </div>
+</Layout>

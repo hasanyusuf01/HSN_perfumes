@@ -1,0 +1,142 @@
+---
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import brand from '../content/settings/brand.json';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonicalURL?: string;
+}
+
+const {
+  title = brand.brand_name,
+  description = brand.hero_subtitle,
+  image = '/images/og-image.jpg',
+  canonicalURL = Astro.url.href,
+} = Astro.props;
+
+const fullTitle = title === brand.brand_name ? title : `${title} — ${brand.brand_name}`;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content={fullTitle} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={image} />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <title>{fullTitle}</title>
+  </head>
+  <body class="bg-obsidian text-cream font-body antialiased overflow-x-hidden">
+    <!-- Grain overlay -->
+    <div class="fixed inset-0 pointer-events-none z-50 opacity-[0.03]" style="background-image: url('data:image/svg+xml,<svg viewBox=&quot;0 0 256 256&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;><filter id=&quot;noise&quot;><feTurbulence type=&quot;fractalNoise&quot; baseFrequency=&quot;0.9&quot; numOctaves=&quot;4&quot; stitchTiles=&quot;stitch&quot;/></filter><rect width=&quot;100%&quot; height=&quot;100%&quot; filter=&quot;url(%23noise)&quot;/></svg>'); background-size: 200px;"></div>
+
+    <Navbar />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+
+    <!-- Scroll animation observer -->
+    <script>
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px',
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    </script>
+
+    <style is:global>
+      /* Reveal animation base */
+      .reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .reveal-delay-1 { transition-delay: 0.1s; }
+      .reveal-delay-2 { transition-delay: 0.2s; }
+      .reveal-delay-3 { transition-delay: 0.3s; }
+      .reveal-delay-4 { transition-delay: 0.4s; }
+      .reveal-delay-5 { transition-delay: 0.5s; }
+
+      /* Gold shimmer text */
+      .gold-shimmer {
+        background: linear-gradient(90deg, #b8942a 0%, #d4af37 30%, #e8c84a 50%, #d4af37 70%, #b8942a 100%);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: shimmer 4s linear infinite;
+      }
+
+      /* Glass card */
+      .glass-card {
+        background: rgba(255,255,255,0.04);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(212,175,55,0.15);
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar { width: 6px; }
+      ::-webkit-scrollbar-track { background: #0f0f0f; }
+      ::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 3px; }
+
+      /* Selection */
+      ::selection { background: rgba(212,175,55,0.3); color: #f7f1e8; }
+
+      /* Divider ornament */
+      .ornament-divider {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        color: #d4af37;
+      }
+      .ornament-divider::before,
+      .ornament-divider::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #d4af37, transparent);
+      }
+    </style>
+  </body>
+</html>

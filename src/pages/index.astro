@@ -1,0 +1,293 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { getCollection } from 'astro:content';
+import brand from '../content/settings/brand.json';
+
+const allProducts = await getCollection('products');
+const featuredProducts = allProducts.filter(p => p.data.featured).slice(0, 4);
+const bestSellers = allProducts.filter(p => p.data.best_seller).slice(0, 3);
+---
+
+<Layout title={brand.brand_name} description={brand.hero_subtitle}>
+
+  <!-- ══ HERO ══════════════════════════════════════════════════ -->
+  <section class="relative min-h-[90vh] lg:min-h-screen flex items-center justify-center overflow-hidden">
+    <!-- Background elements -->
+    <div class="absolute inset-0 bg-obsidian">
+      <!-- Radial glow -->
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-gold/5 blur-[120px] pointer-events-none"></div>
+      <!-- Grid lines -->
+      <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(rgba(212,175,55,1) 1px, transparent 1px), linear-gradient(90deg, rgba(212,175,55,1) 1px, transparent 1px); background-size: 60px 60px;"></div>
+    </div>
+
+    <!-- Floating ornaments -->
+    <div class="absolute top-24 left-12 opacity-10 animate-float" style="animation-delay:0s;">
+      <span class="font-accent text-8xl text-gold">✦</span>
+    </div>
+    <div class="absolute bottom-32 right-16 opacity-10 animate-float" style="animation-delay:2s;">
+      <span class="font-accent text-6xl text-gold">✦</span>
+    </div>
+
+    <!-- Hero content -->
+    <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
+      <!-- Pre-heading -->
+      <p class="font-accent text-xs tracking-[0.5em] uppercase text-gold mb-6 animate-fade-in opacity-0" style="animation-fill-mode:forwards; animation-delay:0.2s;">
+        Luxury Fragrance House
+      </p>
+
+      <!-- Main heading -->
+      <h1 class="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light leading-[1.05] mb-6 animate-fade-up opacity-0" style="animation-fill-mode:forwards; animation-delay:0.4s;">
+        <span class="gold-shimmer">{brand.hero_title.split(' ').slice(0, 2).join(' ')}</span>
+        <br />
+        <span class="text-cream italic">{brand.hero_title.split(' ').slice(2).join(' ')}</span>
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="font-body text-base md:text-lg text-cream/60 max-w-2xl mx-auto leading-relaxed mb-10 animate-fade-up opacity-0" style="animation-fill-mode:forwards; animation-delay:0.6s;">
+        {brand.hero_subtitle}
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-up opacity-0" style="animation-fill-mode:forwards; animation-delay:0.8s;">
+        <a href="/shop" class="group inline-flex items-center gap-3 bg-gold hover:bg-gold-light text-obsidian font-body font-semibold text-sm tracking-[0.2em] uppercase px-8 py-4 transition-all duration-300 hover:shadow-lg hover:shadow-gold/30">
+          <span>Explore Collection</span>
+          <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+        <a href={`https://wa.me/${brand.whatsapp_number}?text=Hello%20HSN%20Perfumes%2C%20I%20would%20like%20to%20know%20more%20about%20your%20collection.`} target="_blank" rel="noopener" class="inline-flex items-center gap-3 border border-gold/30 hover:border-gold text-cream hover:text-gold font-body text-sm tracking-[0.2em] uppercase px-8 py-4 transition-all duration-300">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <span>Order on WhatsApp</span>
+        </a>
+      </div>
+
+      <!-- Scroll hint -->
+      <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-30 animate-float">
+        <span class="font-body text-[10px] tracking-[0.3em] uppercase text-cream">Scroll</span>
+        <svg class="w-4 h-6" fill="none" stroke="currentColor" viewBox="0 0 16 24"><rect x="1" y="1" width="14" height="22" rx="7" stroke-width="1.5"/><circle cx="8" cy="7" r="2" fill="currentColor" class="animate-bounce"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ STATS BAR ═══════════════════════════════════════════ -->
+  <section class="bg-gold/5 border-y border-gold/10 py-8">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        {[
+          { num: '50+', label: 'Unique Fragrances' },
+          { num: '100%', label: 'Authentic Ingredients' },
+          { num: '5000+', label: 'Happy Customers' },
+          { num: '24h', label: 'WhatsApp Support' },
+        ].map(stat => (
+          <div class="reveal">
+            <p class="font-display text-3xl md:text-4xl text-gold mb-1">{stat.num}</p>
+            <p class="font-body text-xs tracking-widest uppercase text-cream/50">{stat.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FEATURED COLLECTION ════════════════════════════════ -->
+  <section class="py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <!-- Section header -->
+      <div class="text-center mb-14 reveal">
+        <p class="font-accent text-xs tracking-[0.4em] uppercase text-gold mb-3">Hand-Selected</p>
+        <h2 class="font-display text-4xl md:text-5xl font-light text-cream mb-4">
+          Featured <span class="italic text-gold">Collection</span>
+        </h2>
+        <div class="ornament-divider max-w-xs mx-auto mt-6">
+          <span class="font-display italic text-xs text-gold/50">✦</span>
+        </div>
+      </div>
+
+      <!-- Product grid -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+        {featuredProducts.map((product, i) => (
+          <ProductCard
+            name={product.data.name}
+            slug={product.slug}
+            sku={product.data.sku}
+            price={product.data.price}
+            category={product.data.category}
+            short_description={product.data.short_description}
+            main_image={product.data.main_image}
+            sizes={product.data.sizes}
+            in_stock={product.data.in_stock}
+            best_seller={product.data.best_seller}
+            featured={product.data.featured}
+            delay={i + 1}
+          />
+        ))}
+      </div>
+
+      <div class="text-center mt-12 reveal">
+        <a href="/shop" class="group inline-flex items-center gap-3 border border-gold/30 hover:border-gold text-cream hover:text-gold font-body text-sm tracking-[0.2em] uppercase px-8 py-4 transition-all duration-300">
+          View Full Collection
+          <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ WHY HSN PERFUMES ═══════════════════════════════════ -->
+  <section class="py-20 bg-charcoal/40 border-y border-gold/5">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="text-center mb-16 reveal">
+        <p class="font-accent text-xs tracking-[0.4em] uppercase text-gold mb-3">Our Promise</p>
+        <h2 class="font-display text-4xl md:text-5xl font-light text-cream">
+          Why Choose <span class="italic text-gold">HSN</span>
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {[
+          {
+            icon: '◈',
+            title: 'Authentic Ingredients',
+            desc: 'Every fragrance is crafted from genuine, high-grade raw materials sourced from the finest suppliers in France, the Middle East, and India.',
+          },
+          {
+            icon: '◆',
+            title: 'Unmatched Longevity',
+            desc: 'Our concentration levels ensure your fragrance lasts from morning meetings to midnight gatherings without needing reapplication.',
+          },
+          {
+            icon: '◇',
+            title: 'Instant WhatsApp Ordering',
+            desc: 'No complicated checkout. Simply choose your fragrance, tap Buy on WhatsApp, and receive confirmation within minutes.',
+          },
+          {
+            icon: '✦',
+            title: 'Luxury Packaging',
+            desc: 'Each perfume arrives in premium packaging worthy of gifting — a first impression as memorable as the scent inside.',
+          },
+          {
+            icon: '◈',
+            title: 'Expert Curation',
+            desc: 'Every fragrance in our collection is personally tested and selected — no fillers, no compromises, only the exceptional.',
+          },
+          {
+            icon: '◆',
+            title: 'Nationwide Delivery',
+            desc: 'Fast, insured shipping across India. Your order is handled with the same care we put into the fragrances themselves.',
+          },
+        ].map((item, i) => (
+          <div class={`reveal reveal-delay-${(i % 3) + 1} glass-card p-7 group hover:border-gold/30 transition-all duration-500`}>
+            <span class="font-accent text-2xl text-gold block mb-4 group-hover:scale-110 transition-transform duration-300">{item.icon}</span>
+            <h3 class="font-display text-lg font-medium text-cream mb-3">{item.title}</h3>
+            <p class="font-body text-sm text-cream/55 leading-relaxed">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ BEST SELLERS ═══════════════════════════════════════ -->
+  {bestSellers.length > 0 && (
+    <section class="py-20 lg:py-28">
+      <div class="max-w-7xl mx-auto px-6 lg:px-12">
+        <div class="text-center mb-14 reveal">
+          <p class="font-accent text-xs tracking-[0.4em] uppercase text-gold mb-3">Most Loved</p>
+          <h2 class="font-display text-4xl md:text-5xl font-light text-cream">
+            Best <span class="italic text-gold">Sellers</span>
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {bestSellers.map((product, i) => (
+            <ProductCard
+              name={product.data.name}
+              slug={product.slug}
+              sku={product.data.sku}
+              price={product.data.price}
+              category={product.data.category}
+              short_description={product.data.short_description}
+              main_image={product.data.main_image}
+              sizes={product.data.sizes}
+              in_stock={product.data.in_stock}
+              best_seller={product.data.best_seller}
+              delay={i + 1}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- ══ CATEGORIES ════════════════════════════════════════ -->
+  <section class="py-16 bg-charcoal/30 border-y border-gold/5">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="text-center mb-12 reveal">
+        <h2 class="font-display text-3xl md:text-4xl font-light text-cream">
+          Shop by <span class="italic text-gold">Category</span>
+        </h2>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {[
+          { name: 'Oud', icon: '🌿', desc: 'Rich & Resinous' },
+          { name: 'Floral', icon: '🌸', desc: 'Light & Feminine' },
+          { name: 'Oriental', icon: '✨', desc: 'Warm & Spicy' },
+          { name: 'Woody', icon: '🌲', desc: 'Earthy & Grounded' },
+        ].map((cat, i) => (
+          <a
+            href={`/shop?category=${cat.name}`}
+            class={`reveal reveal-delay-${i+1} group glass-card p-6 text-center hover:border-gold/40 transition-all duration-500 hover:-translate-y-0.5`}
+          >
+            <span class="text-3xl block mb-3">{cat.icon}</span>
+            <h3 class="font-accent text-sm tracking-widest text-cream group-hover:text-gold transition-colors">{cat.name}</h3>
+            <p class="font-body text-xs text-cream/40 mt-1">{cat.desc}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ WHATSAPP CTA ════════════════════════════════════════ -->
+  <section class="py-24 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-gold/10 via-obsidian to-gold/5"></div>
+    <div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(circle at 20% 80%, #d4af37 1px, transparent 1px), radial-gradient(circle at 80% 20%, #d4af37 1px, transparent 1px); background-size: 40px 40px;"></div>
+
+    <div class="relative max-w-3xl mx-auto px-6 text-center reveal">
+      <p class="font-accent text-xs tracking-[0.4em] uppercase text-gold mb-4">Ready to Order?</p>
+      <h2 class="font-display text-4xl md:text-5xl font-light text-cream mb-4">
+        Experience Luxury <br/>
+        <span class="italic text-gold">One Message Away</span>
+      </h2>
+      <p class="font-body text-cream/60 mb-10 leading-relaxed max-w-xl mx-auto">
+        Choose your fragrance, tap the button below, and we'll send you your perfume with a personal touch. No accounts, no hassle — just pure luxury delivered to your door.
+      </p>
+      <a
+        href={`https://wa.me/${brand.whatsapp_number}?text=Hello%20HSN%20Perfumes%2C%20I%20would%20like%20to%20browse%20your%20collection%20and%20place%20an%20order.`}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group inline-flex items-center gap-3 bg-gold hover:bg-gold-light text-obsidian font-body font-bold text-sm tracking-[0.2em] uppercase px-10 py-5 transition-all duration-300 hover:shadow-2xl hover:shadow-gold/40 animate-pulse-gold"
+      >
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Chat on WhatsApp
+        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+      </a>
+      <p class="font-body text-xs text-cream/30 mt-6 tracking-widest">Usually responds within 1 hour</p>
+    </div>
+  </section>
+
+  <!-- ══ TRUST BADGES ═══════════════════════════════════════ -->
+  <section class="py-12 border-t border-gold/10">
+    <div class="max-w-5xl mx-auto px-6 lg:px-12">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        {[
+          { icon: '🔒', text: 'Secure Ordering' },
+          { icon: '🚀', text: 'Fast Delivery' },
+          { icon: '💎', text: 'Premium Quality' },
+          { icon: '🔄', text: 'Easy Returns' },
+        ].map(b => (
+          <div class="flex flex-col items-center gap-2 reveal">
+            <span class="text-2xl">{b.icon}</span>
+            <span class="font-body text-xs tracking-widest uppercase text-cream/40">{b.text}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</Layout>
