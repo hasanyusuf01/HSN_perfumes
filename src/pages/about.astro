@@ -1,0 +1,144 @@
+---
+import Layout from '../layouts/Layout.astro';
+import brand from '../content/settings/brand.json';
+---
+
+<Layout title="Our Story" description="Learn about HSN Perfumes — our heritage, values, and passion for luxury fragrance.">
+
+  <!-- Hero -->
+  <div class="relative py-24 lg:py-36 overflow-hidden">
+    <div class="absolute inset-0 bg-charcoal/50">
+      <div class="absolute top-0 right-0 w-96 h-96 rounded-full bg-gold/5 blur-[100px]"></div>
+      <div class="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-gold/5 blur-[80px]"></div>
+    </div>
+    <div class="relative max-w-4xl mx-auto px-6 lg:px-12 text-center">
+      <p class="font-accent text-xs tracking-[0.4em] uppercase text-gold mb-4 reveal">Our Heritage</p>
+      <h1 class="font-display text-5xl md:text-6xl lg:text-7xl font-light text-cream mb-6 reveal reveal-delay-1">
+        The Story of <br/><span class="italic text-gold">HSN Perfumes</span>
+      </h1>
+      <p class="font-display italic text-xl text-cream/60 max-w-2xl mx-auto leading-relaxed reveal reveal-delay-2">
+        "{brand.tagline}"
+      </p>
+    </div>
+  </div>
+
+  <!-- Story -->
+  <section class="py-16 lg:py-24">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
+        <!-- Decorative panel -->
+        <div class="reveal relative">
+          <div class="aspect-square bg-charcoal border border-gold/10 relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 30% 70%, #d4af37 1px, transparent 1px), radial-gradient(circle at 70% 30%, #d4af37 1px, transparent 1px); background-size: 30px 30px;"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="text-center">
+                <p class="font-accent text-8xl lg:text-9xl text-gold opacity-20 leading-none">HSN</p>
+                <div class="mt-4 w-32 h-px bg-gradient-to-r from-transparent via-gold to-transparent mx-auto"></div>
+                <p class="font-display italic text-gold/40 mt-4 text-xl">Est. 2020</p>
+              </div>
+            </div>
+            <!-- Corner ornaments -->
+            <span class="absolute top-4 left-4 text-gold/20 font-accent text-2xl">✦</span>
+            <span class="absolute bottom-4 right-4 text-gold/20 font-accent text-2xl">✦</span>
+          </div>
+        </div>
+
+        <div class="reveal reveal-delay-2">
+          <h2 class="font-display text-3xl md:text-4xl font-light text-cream mb-6">
+            Born from a <span class="italic text-gold">Passion for Perfume</span>
+          </h2>
+          <div class="space-y-4 font-body text-cream/65 leading-relaxed">
+            <p>
+              HSN Perfumes was born from a deep conviction — that truly exceptional fragrance should not be the exclusive privilege of those who can afford European designer prices. Our founders believed that authentic, luxurious scent experiences deserved to be accessible to every passionate fragrance lover in India.
+            </p>
+            <p>
+              We began our journey by sourcing the finest raw materials directly from the world's most prestigious fragrance regions: the oud-rich forests of Southeast Asia, the rose fields of Bulgaria, the jasmine groves of Grasse, and the spice markets of the Middle East.
+            </p>
+            <p>
+              Today, HSN Perfumes stands as a testament to that founding vision — a curated collection of fragrances that rival the finest houses in the world, available at a fraction of the price, ordered with nothing more than a WhatsApp message.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Values -->
+      <div class="reveal text-center mb-12">
+        <div class="ornament-divider">
+          <h2 class="font-accent text-xs tracking-[0.4em] uppercase text-gold whitespace-nowrap px-6">Our Values</h2>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
+        {[
+          {
+            num: '01',
+            title: 'Uncompromising Authenticity',
+            desc: 'We never use synthetic substitutes where the genuine material exists. Every oud is real oud. Every rose absolute is genuine. Our ingredients speak for themselves.',
+          },
+          {
+            num: '02',
+            title: 'Artisanal Craft',
+            desc: 'Each fragrance is developed with meticulous attention to balance, longevity, and character. We do not rush the creative process — great perfume cannot be rushed.',
+          },
+          {
+            num: '03',
+            title: 'Direct Relationship',
+            desc: 'We believe in a personal connection with our customers. The WhatsApp ordering model is not just convenience — it is our philosophy of doing business face-to-face, even digitally.',
+          },
+        ].map(v => (
+          <div class="reveal glass-card p-8 border border-gold/10 hover:border-gold/25 transition-all duration-500">
+            <p class="font-accent text-5xl text-gold/10 mb-4 leading-none">{v.num}</p>
+            <h3 class="font-display text-xl font-medium text-cream mb-3">{v.title}</h3>
+            <p class="font-body text-sm text-cream/55 leading-relaxed">{v.desc}</p>
+          </div>
+        ))}
+      </div>
+
+      <!-- Ingredients highlight -->
+      <div class="reveal glass-card border border-gold/10 p-10 lg:p-14 text-center">
+        <p class="font-accent text-xs tracking-[0.4em] uppercase text-gold mb-4">What We Use</p>
+        <h2 class="font-display text-3xl md:text-4xl font-light text-cream mb-8">
+          Ingredients from <span class="italic text-gold">Around the World</span>
+        </h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {[
+            { origin: 'Southeast Asia', ingredient: 'Agarwood Oud' },
+            { origin: 'Bulgaria', ingredient: 'Rose Absolute' },
+            { origin: 'France (Grasse)', ingredient: 'Jasmine Absolute' },
+            { origin: 'Australia', ingredient: 'Sandalwood' },
+            { origin: 'India', ingredient: 'Vetiver & Spices' },
+            { origin: 'Middle East', ingredient: 'Amber & Resins' },
+            { origin: 'Sri Lanka', ingredient: 'Cinnamon Bark' },
+            { origin: 'Morocco', ingredient: 'Cedarwood Atlas' },
+          ].map(ing => (
+            <div class="reveal text-center py-2">
+              <p class="font-display text-base text-gold mb-1">{ing.ingredient}</p>
+              <p class="font-body text-xs text-cream/35 tracking-widest uppercase">{ing.origin}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 bg-gold/5 border-y border-gold/10">
+    <div class="max-w-2xl mx-auto px-6 text-center reveal">
+      <h2 class="font-display text-3xl md:text-4xl font-light text-cream mb-4">
+        Ready to Find Your <span class="italic text-gold">Signature Scent?</span>
+      </h2>
+      <p class="font-body text-cream/50 mb-8">
+        Browse our full collection and order directly via WhatsApp. We'll guide you to the perfect fragrance.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/shop" class="inline-flex items-center justify-center gap-2 bg-gold hover:bg-gold-light text-obsidian font-body font-semibold text-sm tracking-widest uppercase px-8 py-4 transition-all duration-300">
+          Browse Collection
+        </a>
+        <a href="/contact" class="inline-flex items-center justify-center gap-2 border border-gold/30 hover:border-gold text-cream hover:text-gold font-body text-sm tracking-widest uppercase px-8 py-4 transition-all duration-300">
+          Contact Us
+        </a>
+      </div>
+    </div>
+  </section>
+
+</Layout>
