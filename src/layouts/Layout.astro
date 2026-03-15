@@ -51,6 +51,9 @@ const fullTitle = title === brand.brand_name ? title : `${title} — ${brand.bra
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <title>{fullTitle}</title>
+
+    <!-- Netlify Identity Widget — required to handle /admin invite tokens -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body class="bg-obsidian text-cream font-body antialiased overflow-x-hidden">
     <!-- Grain overlay -->
@@ -61,6 +64,19 @@ const fullTitle = title === brand.brand_name ? title : `${title} — ${brand.bra
       <slot />
     </main>
     <Footer />
+
+    <!-- Netlify Identity: redirect to /admin after login -->
+    <script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on('init', user => {
+          if (!user) {
+            window.netlifyIdentity.on('login', () => {
+              document.location.href = '/admin/';
+            });
+          }
+        });
+      }
+    </script>
 
     <!-- Scroll animation observer -->
     <script>
