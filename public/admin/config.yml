@@ -1,18 +1,20 @@
-backend:
-  name: git-gateway
-  branch: main
+
+# backend:
+#   name: git-gateway
+#   branch: main
+
 
 # Change to your repo details:
-# backend:
-#   name: github
-#   repo: your-github-username/hsn-perfumes
-#   branch: main
+backend:
+  name: github
+  repo: hasanyusuf01/HSN_perfumes
+  branch: main
 
 media_folder: public/images/products
 public_folder: /images/products
 
-site_url: https://your-domain.pages.dev
-display_url: https://your-domain.pages.dev
+site_url: https://hsnperfumes.pages.dev
+display_url: https://hsnperfumes.pages.dev
 
 logo_url: /favicon.svg
 
